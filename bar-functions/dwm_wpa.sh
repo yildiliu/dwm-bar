@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Dependancies: wpa_cli
-
+# TODO: consider following case: wpa_supplicant is not running
 dwm_wpa() {
    CONSTATE=$(wpa_cli status | sed -n '/wpa_state/s/^.*=//p')
 
@@ -12,19 +12,19 @@ dwm_wpa() {
          CONRSSI=$(wpa_cli signal_poll | sed -n '/AVG_RSSI/s/^.*=//p')
          if [ "$CONRSSI" -gt -35 ]; then   
             printf "%s" "$SEP1"
-            printf "\uF927 %s %s" "$CONSSID" "$CONIP"
+            printf "  %s %s" "$CONSSID" "$CONIP"
             printf "%s\n" "$SEP2"
          elif [ "$CONRSSI" -ge -55 ] && [ "$CONRSSI" -lt -35 ]; then   
             printf "%s" "$SEP1"
-            printf "\uF924 %s %s" "$CONSSID" "$CONIP"
+            printf "  %s %s" "$CONSSID" "$CONIP"
             printf "%s\n" "$SEP2"
          elif [ "$CONRSSI" -ge -75 ] && [ "$CONRSSI" -lt -55 ]; then   
             printf "%s" "$SEP1"
-            printf "\uF921 %s %s" "$CONSSID" "$CONIP"
+            printf "  %s %s" "$CONSSID" "$CONIP"
             printf "%s\n" "$SEP2"
          else 
             printf "%s" "$SEP1"
-            printf "\uF91E %s %s" "$CONSSID" "$CONIP"
+            printf "  %s %s" "$CONSSID" "$CONIP"
             printf "%s\n" "$SEP2"
          fi
          ;;
